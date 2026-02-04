@@ -3,7 +3,6 @@
  */
 public class TopSecret {
 
-
     public void validArgument(String[] arguments) {
         try {
             // if no arguments are passed, a function displaying the list of files will be printed
@@ -23,7 +22,7 @@ public class TopSecret {
                 System.out.println("Invalid number of arguments. First argument must be a file name and the second argument must be a key type");
             }
         } catch (IllegalArgumentException e) {
-            System.out.println("invalid arguments entered. First argument must be a file name and the second argument must be a key type");
+            System.out.println("Invalid arguments entered. First argument must be a file name and the second argument must be a key type");
         }
     }
 
@@ -42,35 +41,36 @@ public class TopSecret {
             throw new IllegalArgumentException("File number must be positive");
         } else if (fileNum > 2) {
             throw new IllegalArgumentException("File does not exist");
-        } else {
-            return fileNum;
         }
+
+        return fileNum;
     }
 
     // this function checks to ensure the decryption key type is valid
     private String isValidKeyType(String keyType) {
-        // add in list of different decryption keys
-        String keys [] = {};
-        for (int i = 0; i < keys.length; i++) {
-            if (keys[i].equals(keyType)) {
+        // add other key types
+        String[] keys = {"default"};
+        for (String key : keys) {
+            if (key.equals(keyType)) {
                 return keyType;
-            } else {
-            throw new IllegalArgumentException("Invalid key type");
+            }
         }
+        throw new IllegalArgumentException("Invalid key type");
     }
 
-
         // this function displays the list of files in the folder
-        private void displayList () {
-            String fileList = " ";
-            System.out.println(fileList);
+        private void displayList() {
+        // replace with actual file names
+            System.out.println("01 filea.txt");
+            System.out.println("02 fileb.txt");
+            System.out.println("03 filec.txt");
         }
 
 
         // this function displays the file decrypted
-        private void displayFile (int fileNum, String keyType){
+        private void displayFile(int fileNum, String keyType) {
             System.out.println(fileNum + ": " + keyType);
 
-            // call method to decrypt and print file
+            // decrypt and print file here
         }
 }
