@@ -64,7 +64,6 @@ public class TopSecret {
             System.out.println("01 filea.txt");
             System.out.println("02 fileb.txt");
             System.out.println("03 filec.txt");
-            System.out.println();
         }
 
 
