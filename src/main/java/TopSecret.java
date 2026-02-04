@@ -2,4 +2,75 @@
  * Commmand Line Utility
  */
 public class TopSecret {
+
+
+    public void validArgument(String[] arguments) {
+        try {
+            // if no arguments are passed, a function displaying the list of files will be printed
+            if (arguments.length == 0) {
+                displayList();
+                //if one argument is passed, the corresponding file will be printed and decrypted with the default key
+            } else if (arguments.length == 1) {
+                int fileNum = isValidFile(arguments[0]);
+                displayFile(fileNum, "default");
+                //if two argument is passed, the file corresponding to the first argument will be printed and decrypted with the key corresponding to the second argument
+            } else if (arguments.length == 2) {
+                int fileNum = isValidFile(arguments[0]);
+                String keyType = isValidKeyType(arguments[1]);
+                displayFile(fileNum, keyType);
+                //if more than two arguments are passed, the following message is printed
+            } else {
+                System.out.println("Invalid number of arguments. First argument must be a file name and the second argument must be a key type");
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println("invalid arguments entered. First argument must be a file name and the second argument must be a key type");
+        }
+    }
+
+
+    // this function checks to ensure the file number is valid
+    private int isValidFile(String fileName) {
+        int fileNum;
+
+        try {
+            fileNum = Integer.parseInt(fileName);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("File number must be an integer");
+        }
+
+        if (fileNum < 1) {
+            throw new IllegalArgumentException("File number must be positive");
+        } else if (fileNum > 2) {
+            throw new IllegalArgumentException("File does not exist");
+        } else {
+            return fileNum;
+        }
+    }
+
+    // this function checks to ensure the decryption key type is valid
+    private String isValidKeyType(String keyType) {
+        // add in list of different decryption keys
+        String keys [] = {};
+        for (int i = 0; i < keys.length; i++) {
+            if (keys[i].equals(keyType)) {
+                return keyType;
+            } else {
+            throw new IllegalArgumentException("Invalid key type");
+        }
+    }
+
+
+        // this function displays the list of files in the folder
+        private void displayList () {
+            String fileList = " ";
+            System.out.println(fileList);
+        }
+
+
+        // this function displays the file decrypted
+        private void displayFile (int fileNum, String keyType){
+            System.out.println(fileNum + ": " + keyType);
+
+            // call method to decrypt and print file
+        }
 }
