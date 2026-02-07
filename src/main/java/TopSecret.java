@@ -1,6 +1,3 @@
-/**
- * Commmand Line Utility
- */
 public class TopSecret {
 
     public void validArgument(String[] arguments) {

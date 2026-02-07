@@ -1,0 +1,43 @@
+When the program requests a list of files, the FileHandler will do the following:
+
+-Check that a folder named data/ exists in the project directory
+-Retrieve all regular files located inside the data/ folder
+-Return a list of filenames only (not full file paths)
+-Sort the filenames alphabetically before returning them
+
+This allows the user interface to display files in a consistent numbered format, such as:
+
+01 filea.txt
+02 fileb.txt
+03 filec.txt
+
+When the program requests the contents of a file, the FileHandler will do the following:
+
+-Check that the provided filename is not null or empty
+-Verify that the data/ directory exists and is accessible
+-Ensure that the requested file exists inside the data/ directory
+-Read and return the full contents of the file as a string
+
+
+Error Handling
+
+If a file-related error occurs, the FileHandler will throw a FileAccessException.
+
+Errors are thrown in the following situations:
+
+-The data/ directory does not exist
+-The requested file does not exist
+-The filename provided is null or blank
+-An attempt is made to access a file outside of the data/ directory
+
+Testing
+
+The FileHandler is tested using unit tests written with JUnit 5.
+Temporary directories are used during testing to avoid reliance on real project files.
+
+Tests verify that:
+
+-Files are listed in sorted order
+-File contents are read correctly
+-Missing directories and files are handled properly
+-Path traversal attempts are blocked
