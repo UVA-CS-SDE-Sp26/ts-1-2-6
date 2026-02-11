@@ -1,0 +1,16 @@
+
+All access to files and content of files is to be done through the command line.
+Command line is connected to the FileHandler, so files can be requested and will be returned with the contents.
+
+If program is executed with no arguments:
+    - list of files is available is produced
+    - all files will be numbered as such:
+        01 filea.txt
+        02 fileb.txt
+        03 filec.txt
+
+If program is executed with an argument:
+    - if it's a valid argument, file content is retrieved and displayed in terminal
+        - either argument is a number or the filename
+    - else, returns message saying "Argument is invalid, please enter a valid filename"
+
