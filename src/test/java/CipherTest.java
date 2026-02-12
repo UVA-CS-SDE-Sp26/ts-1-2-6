@@ -20,7 +20,7 @@ public class CipherTest {
     //Tests if the decipher method works properly with known characters in the key file
     @Test
     void testDecipher(){
-        String ciphered = "cpep";
+        String ciphered = "ylwl";
         String deciphered = "bodo";
         assertEquals(deciphered, cipher.decipher(ciphered));
     }
@@ -28,7 +28,7 @@ public class CipherTest {
     //Tests if the decipher method properly deals with characters not in the key file
     @Test
     void testDecipherWithUnknownCharacters(){
-        String ciphered = "cpep!!";
+        String ciphered = "ylwl!!";
         String deciphered = "bodo!!";
         assertEquals(deciphered, cipher.decipher(ciphered));
     }
