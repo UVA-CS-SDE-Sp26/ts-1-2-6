@@ -13,9 +13,13 @@ When the program is run with two arguments, the program will do the following:
 - check to ensure the second argument is a valid decryption type
 - print the contents of the file decrypted with the key specified in the second argument
 
+Error handling:
 * If the user enters a file name that is not a number, an error message will be displayed on the screen
 * If the user enters a file name that does not exist, a message informing them that the file does not exist
 will be displayed
 * If the user enters an invalid decryption key name, a message informing them that the decryption key does not exist
 will be displayed
+* if the user enters more than three arguments, a message will be displayed indicating they entered an inappropriate
+number of arguments
+
 
