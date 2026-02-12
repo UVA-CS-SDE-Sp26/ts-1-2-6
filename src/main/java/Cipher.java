@@ -15,6 +15,11 @@ public class Cipher {
         this.cipherMap = buildCipherMap();
     }
 
+    //Getter for getCipherMap()
+    public Map<Character, Character> getCipherMap() {
+        return this.cipherMap;
+    }
+
     //reads the cipher key file from the path "ciphers/key.txt" and validates the keyType
     private List<String> readCipherKeyFile(){
         try{

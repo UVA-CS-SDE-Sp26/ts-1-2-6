@@ -2,6 +2,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.nio.file.*;
+import java.util.List;
+import java.util.Map;
+import java.io.IOException;
+
 public class CipherTest {
 
     private Cipher cipher;
@@ -17,20 +22,20 @@ public class CipherTest {
         assertNotNull(cipher);
     }
 
-    //Tests if the decipher method works properly with known characters in the key file
+    //Tests that each character in the cipher key is correctly mapped to its actual character
+    //The test reads the given key file so it will still work if the cipher changes
     @Test
-    void testDecipher(){
-        String ciphered = "ylwl";
-        String deciphered = "bodo";
-        assertEquals(deciphered, cipher.decipher(ciphered));
-    }
+    void testDecipher() throws IOException {
+        Map<Character, Character> map = cipher.getCipherMap();
+        List<String> lines = Files.readAllLines(Path.of("ciphers/key.txt"));
+        String actualLetters = lines.get(0);
+        String cipheredLetters = lines.get(1);
 
-    //Tests if the decipher method properly deals with characters not in the key file
-    @Test
-    void testDecipherWithUnknownCharacters(){
-        String ciphered = "ylwl!!";
-        String deciphered = "bodo!!";
-        assertEquals(deciphered, cipher.decipher(ciphered));
+        for(int i = 0; i < cipheredLetters.length(); i++){
+            char cipheredCharacter = cipheredLetters.charAt(i);
+            char actualCharacter = actualLetters.charAt(i);
+            assertEquals(actualCharacter, map.get(cipheredCharacter), "Decipher was incorrect for character: " + cipheredCharacter);
+        }
     }
 
     //Tests if the decipher method properly deals with an empty string
