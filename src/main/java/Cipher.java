@@ -53,6 +53,10 @@ public class Cipher {
 
     //deciphers the given ciphered text
     public String decipher(String cipheredString){
+        if(cipheredString == null){
+            throw new IllegalArgumentException("Ciphered String cannot be null");
+        }
+
         StringBuilder decipheredString = new StringBuilder();
         //converts the string to a character array
         char[] characters = cipheredString.toCharArray();

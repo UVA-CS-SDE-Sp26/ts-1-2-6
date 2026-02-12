@@ -1,0 +1,32 @@
+Cipher Class
+
+The Cipher class reads a cipher key from a file named key.txt within a folder called ciphers.
+The Cipher class validates the cipher key, builds a cipher map, and then deciphers the given string.
+
+readCipherKeyFile():
+    Reads the cipher key from ciphers/key.txt
+    Validates that the cipher key is exactly two lines of equal length
+    Throws an exception if the file cannot be read or is invalid
+
+buildCipherMap():
+    calls readCipherKeyFile() to get the validated key
+    Assigns the first line to the actual letters and the second line to the ciphered letters
+    Builds a map from ciphered characters to actual characters
+    Stores the completed map in cipherMap
+
+decipher():
+    Throws an exception if the input string is null
+    Turns the ciphered string into an array of characters in order to deal with each character/mapping individually
+    Converts each valid character using cipherMap; leaves invalid characters unchanged
+    Returns a deciphered string
+
+
+Testing Cipher Class using CipherTest:
+
+Testing was done using junit. Completed the following tests:
+    testCipherConstructor(): Tested the constructor to see if the file was readable, key is valid, and if the cipher map was built
+    testDecipher(): Tests if the decipher method correctly deciphers a string with known characters
+    testDecipherWithUnknownCharacters(): Tests if the decipher method leaves unknown characters (not in the key file) as is. Tests both known and unknown characters.
+    testDecipherWithEmptyString(): Tests if the decipher method properly deals with an empty string
+    testDecipherWithNull(): Tests if the decipher method properly deals with a null value
+    testDecipherWithNoValidCharacters(): Tests if a string with no valid characters is returned as is
