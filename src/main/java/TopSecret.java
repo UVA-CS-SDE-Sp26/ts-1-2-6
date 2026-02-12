@@ -1,5 +1,6 @@
-public class TopSecret {
+import java.util.List;
 
+public class TopSecret {
     public void validArgument(String[] arguments) {
         try {
             // if no arguments are passed, a function displaying the list of files will be printed
@@ -34,19 +35,19 @@ public class TopSecret {
             throw new IllegalArgumentException("File number must be an integer");
         }
 
-        if (fileNum < 1) {
-            throw new IllegalArgumentException("File number must be positive");
-        } else if (fileNum > 2) {
-            throw new IllegalArgumentException("File does not exist");
-        }
+        ProgramControl pc = new ProgramControl(new DefaultFileHandler());
+        List<String> files = pc.getFileHandler().listFiles();
 
+        //check to see if the file number is valid
+        if (fileNum < 1 || fileNum > files.size()) {
+            throw new IllegalArgumentException("File doesn't exist");
+        }
         return fileNum;
     }
 
     // this function checks to ensure the decryption key type is valid
     private String isValidKeyType(String keyType) {
-        // add other key types
-        String[] keys = {"default"};
+        String[] keys = {"default", "cipher"};
         for (String key : keys) {
             if (key.equals(keyType)) {
                 return keyType;
@@ -57,17 +58,41 @@ public class TopSecret {
 
         // this function displays the list of files in the folder
         private void displayList() {
-        // replace with actual file names
-            System.out.println("01 filea.txt");
-            System.out.println("02 fileb.txt");
-            System.out.println("03 filec.txt");
+            ProgramControl pc = new ProgramControl(new DefaultFileHandler());
+            List<String> files = pc.getFileHandler().listFiles();
+
+            int index = 1;
+            for(String file: files){
+                System.out.printf("%02d %s%n", index, file);
+                index++;
+            }
         }
 
 
         // this function displays the file decrypted
         private void displayFile(int fileNum, String keyType) {
-            System.out.println(fileNum + ": " + keyType);
+            ProgramControl pc = new ProgramControl(new DefaultFileHandler());
+            List<String> files = pc.getFileHandler().listFiles();
 
-            // decrypt and print file here
+            String fileName = files.get(fileNum -1);
+            String content;
+
+            try{
+                content = pc.requestControl(new String[]{fileName});
+            }catch(FileAccessException exception){
+                System.out.println("Failed to read the file: " + exception.getMessage());
+                return;
+            }
+            //if the keyType is cipher then decipher the content
+            if("cipher".equals(keyType)){
+                Cipher cipher = new Cipher();
+                content = cipher.decipher(content);
+            }
+            System.out.println(content);
+        }
+
+        public static void main(String[] args){
+            TopSecret topSecret = new TopSecret();
+            topSecret.validArgument(args);
         }
 }

@@ -7,9 +7,12 @@ public class ProgramControl {
     public ProgramControl(DefaultFileHandler fileHandler) {
         this.fileHandler = fileHandler;
     }
+    public DefaultFileHandler getFileHandler(){
+        return this.fileHandler;
+    }
     public String requestControl(String[] arguments){
         List<String> files = fileHandler.listFiles();
-        if (files.isEmpty() || files == null){
+        if (files == null || files.isEmpty()){
             return "No such file or directory";
         }
 

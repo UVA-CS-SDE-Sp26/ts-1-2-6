@@ -1,7 +1,7 @@
 plugins {
-    id("java")
+    id ("java")
+    id ("application")
 }
-
 group = "org.example"
 version = "1.0-SNAPSHOT"
 
@@ -17,4 +17,8 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+application{
+    mainClass.set("TopSecret")
 }
