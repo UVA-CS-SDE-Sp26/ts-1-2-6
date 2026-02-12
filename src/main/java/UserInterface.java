@@ -49,6 +49,7 @@ public class UserInterface {
     // this function checks to ensure the decryption key type is valid
     private String isValidKeyType(String keyType) {
         String[] keys = {"default", "cipher"};
+        keyType = keyType.toLowerCase();
         for (String key : keys) {
             if (key.equals(keyType)) {
                 return keyType;
