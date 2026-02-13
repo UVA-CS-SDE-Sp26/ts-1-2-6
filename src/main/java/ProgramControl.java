@@ -2,25 +2,25 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class ProgramControl {
-    private DefaultFileHandler fileHandler;
+    private FileHandler fileHandler;
 
-    public ProgramControl(DefaultFileHandler fileHandler) {
+    public ProgramControl(FileHandler fileHandler) {
         this.fileHandler = fileHandler;
     }
-    public DefaultFileHandler getFileHandler(){
+    public FileHandler getFileHandler(){
         return this.fileHandler;
     }
     public String requestControl(String[] arguments){
         List<String> files = fileHandler.listFiles();
         if (files == null || files.isEmpty()){
-            return "No such file or directory";
+            return "No files in directory";
         }
 
         if (arguments.length == 0) { //this is default, no argument, prints all the files in the directory
             String result = "Files in directory: ";
             int indexOfFiles = 1;
             for (String file : files) {
-                result += indexOfFiles + ". " + file + "\n";
+                result += String.format("%02d %s\n", indexOfFiles, file);
                 indexOfFiles++;
             }
             return result;
